@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hospital_management_system/widgets/home_carousel.dart';
 import 'package:hospital_management_system/widgets/navbar.dart';
 
 void main() => runApp(
@@ -17,9 +18,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  TextStyle textFieldStyle(Color color, FontWeight weight, double size) {
-    return TextStyle(color: color, fontWeight: weight, fontSize: size);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +36,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 end: Alignment.bottomRight,
               ),
             ),
-            child: Row(
+            child: Column(
+              children: [
+                HomeCarousel(),
+              ],
             ),
           ),
         ],
