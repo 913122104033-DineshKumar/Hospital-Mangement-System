@@ -18,6 +18,11 @@ class _HomeCarouselState extends State<HomeCarousel> {
     'assets/images/img2.png',
     'assets/images/img3.png',
   ];
+  final List<Text> overlayButtonNames = [
+    Text('Book Now'),
+    Text('Contact Us'),
+    Text('Rate Us')
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -30,31 +35,53 @@ class _HomeCarouselState extends State<HomeCarousel> {
             autoPlay: true,
             enableInfiniteScroll: true,
             enlargeCenterPage: true,
-            onPageChanged: (index, reason) => {
-              setState(() {
-                currentIndex = index;
-              })
-            },
+            onPageChanged:
+                (index, reason) => {
+                  setState(() {
+                    currentIndex = index;
+                  }),
+                },
             autoPlayInterval: Duration(seconds: 3),
           ),
           items:
-              images.map((path) {
-                return ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: Image.asset(path, fit: BoxFit.cover, width: 1000),
+              images.asMap().entries.map((entry) {
+                int key = entry.key;
+                String path = entry.value;
+                return Stack(
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Image.asset(path, fit: BoxFit.cover, width: 1000),
+                    ),
+                    Positioned(
+                      top: 115,
+                      left: 105,
+                      child: ElevatedButton(
+                        onPressed: () {}, 
+                        child: overlayButtonNames[key],
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Color(0xFF2ECC71),
+                          foregroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12.0)
+                          )
+                        )
+                      )
+                    )
+                  ],
                 );
               }).toList(),
         ),
         SizedBox(height: 10.0),
         AnimatedSmoothIndicator(
-          activeIndex: currentIndex, 
+          activeIndex: currentIndex,
           count: images.length,
           effect: ExpandingDotsEffect(
             activeDotColor: Color(0xFF2ECC71),
             dotHeight: 8,
-            dotWidth: 8
+            dotWidth: 8,
           ),
-        )
+        ),
       ],
     );
   }

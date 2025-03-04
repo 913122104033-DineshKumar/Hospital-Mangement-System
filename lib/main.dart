@@ -38,7 +38,10 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             child: Column(
               children: [
-                HomeCarousel(),
+                Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: HomeCarousel(),
+                ),
               ],
             ),
           ),
